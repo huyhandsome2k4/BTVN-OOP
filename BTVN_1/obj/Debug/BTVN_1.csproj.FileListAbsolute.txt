@@ -1,0 +1,7 @@
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\bin\Debug\BTVN_1.exe.config
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\bin\Debug\BTVN_1.exe
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\bin\Debug\BTVN_1.pdb
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\obj\Debug\BTVN_1.csproj.AssemblyReference.cache
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\obj\Debug\BTVN_1.csproj.CoreCompileInputs.cache
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\obj\Debug\BTVN_1.exe
+C:\Users\shinw\source\repos\BTVN_1\BTVN_1\obj\Debug\BTVN_1.pdb
