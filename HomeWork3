@@ -1,0 +1,117 @@
+public class MatHang
+{
+    public double Gia { get; private set; }
+    public double GiamGia { get; private set; }
+
+    public MatHang(double gia, double giamGia)
+    {
+        Gia = gia;
+        GiamGia = giamGia;
+    }
+}
+
+public class HoaDonMuaHang
+{
+    private NhanVien NhanVien { get; set; }
+    private List<MatHang> MatHangs { get; set; }
+
+    public HoaDonMuaHang(NhanVien nhanVien)
+    {
+        NhanVien = nhanVien;
+        MatHangs = new List<MatHang>();
+    }
+
+    public void ThemMatHang(MatHang matHang)
+    {
+        MatHangs.Add(matHang);
+    }
+
+    public double LayTongTien()
+    {
+        double tongTien = 0;
+        foreach (var matHang in MatHangs)
+        {
+            tongTien += matHang.Gia;
+        }
+        return tongTien;
+    }
+
+    public void InHoaDon()
+    {
+        Console.WriteLine("Hoa don:");
+        foreach (var matHang in MatHangs)
+        {
+            Console.WriteLine($"Mat hang: Gia - {matHang.Gia}, Giam gia - {matHang.GiamGia}");
+        }
+    }
+}
+
+public class HoaDonGiamGia : HoaDonMuaHang
+{
+    private bool LaKhachHangUaThich { get; set; }
+    private int DemSoMatHangDuocGiamGia { get; set; }
+    private double TongSoTienDuocGiam { get; set; }
+
+    public HoaDonGiamGia(NhanVien nhanVien, bool laKhachHangUaThich) : base(nhanVien)
+    {
+        LaKhachHangUaThich = laKhachHangUaThich;
+        DemSoMatHangDuocGiamGia = 0;
+        TongSoTienDuocGiam = 0.0;
+    }
+
+    public new void ThemMatHang(MatHang matHang)
+    {
+        base.ThemMatHang(matHang);
+
+        if (LaKhachHangUaThich && matHang.GiamGia > 0)
+        {
+            DemSoMatHangDuocGiamGia++;
+            TongSoTienDuocGiam += matHang.GiamGia;
+        }
+    }
+
+    public int LaySoLuongMatHangDuocGiam()
+    {
+        return DemSoMatHangDuocGiamGia;
+    }
+
+    public double LayTongSoTienDuocGiam()
+    {
+        return TongSoTienDuocGiam;
+    }
+
+    public double LayTiLeGiamGia()
+    {
+        double tongTien = LayTongTien();
+        if (tongTien == 0) return 0;
+        return (TongSoTienDuocGiam / tongTien) * 100;
+    }
+}
+
+public class NhanVien
+{
+    public string Ten { get; set; }
+}
+
+public class ChuongTrinh
+{
+    public static void Main(string[] args)
+    {
+        NhanVien nhanVien = new NhanVien { Ten = "John Doe" };
+
+        MatHang matHang1 = new MatHang(1.35, 0.25);
+        MatHang matHang2 = new MatHang(2.5, 0.1);
+
+        HoaDonGiamGia hoaDonGiamGia = new HoaDonGiamGia(nhanVien, true);
+        hoaDonGiamGia.ThemMatHang(matHang1);
+        hoaDonGiamGia.ThemMatHang(matHang2);
+
+        Console.WriteLine("So mat hang duoc giam gia: " + hoaDonGiamGia.LaySoLuongMatHangDuocGiam());
+        Console.WriteLine("Tong so tien giam gia: " + hoaDonGiamGia.LayTongSoTienDuocGiam());
+        Console.WriteLine("Ti le giam gia: " + hoaDonGiamGia.LayTiLeGiamGia());
+
+        hoaDonGiamGia.InHoaDon();
+
+        Console.ReadKey();
+    }
+}
